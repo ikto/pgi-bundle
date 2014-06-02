@@ -1,0 +1,75 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+    <img width="28" height="28" alt="Database" src="data:image/png;base64,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" />
+    <span class="sf-toolbar-status{% if 50 < collector.count %} sf-toolbar-status-yellow{% endif %}">{{ collector.count }}</span>
+    {% if collector.count > 0 %}
+        <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+    {% endif %}
+    {% endset %}
+    {% set text %}
+    <div class="sf-toolbar-info-piece">
+        <b>DB Queries</b>
+        <span>{{ collector.count }}</span>
+    </div>
+    <div class="sf-toolbar-info-piece">
+        <b>Query time</b>
+        <span>{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+    </div>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock toolbar %}
+
+{% block menu %}
+<span class="label">
+    <span class="icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gYBFQAc3fB47gAACRFJREFUWMOtVmtsU+cZfr5zP77XSZzFNqRxGjXEkskMpaIXVKQQClRobQCp6jSkUVVqp46faCsCiU4aWn8M9Uerqi1orENdqkZR1TASVYo0sqVQBVC4JCWFktrBF+yovsTH5/rtRzmnNl2rqd0rHdk+fr/vfd73eW/APbK4uNh9+/btHkppF6W0q16vr8J/kbm5uaRpmt22HqW0nVIqA0Aul+taXl7+zfz8fO7y5cs0lUqNUko7crlcy733kFpNgcslAwCKxeLzgiAcvnXrVmuhUNAVRUEoFDJCodDtSCTy9+XlZb2tre2ooij7VVX97YULF36Wz+dNQRAQiURqsVhsxe/3n5mZmdkzMjLSalkWJElCIBCorFmzhmzatCnl9Xp/TwgZrSoKPLIMAgCFQuEPpVLpd4uLi8zIyAgymQwopWAYBpRSuFwuRKNRDA0NaQ8++ODwmTNnfjk+Po5SqQQAoJQCAHw+HzZs2IAnn3wShUIBJ06cwNdffw3TNGEYBoLBIHbv3o0NGzac8Pl8zxNCLDI/Px/t6Og4OTY2tnl0dBQul8sxTAgBABiGAa/Xi8OHD+P48eOYnZ0Fx3HgOA6UUliW5YTU/r5jxw488sgjeOWVV0AphSiKoJRCURQ8+uijeOGFF85Wq9Xt7IEDB9beuXPnyBtvvAG32w2WZQHA+SSEoFqtYt++fbhy5QrGxsbg9XpBCHEeW0+SJBBCwDAMZmZm4PP58Mwzz2B6etoBJggC5ubmUK1WO5PJ5AJjGMbfxsfHLZ7nncOEEJim6XjU3d2NeDyO06dPIxgMgmVZxzAAMAwDhmFgGIYDyuv14sMPP4Sqqti2bRtWVlYcWgOBAC5evIhisfgrhmXZValUipFlGRzHwbIsWJYFSikopTAMA4ODg7h06RJ0XXcosYE2PvYZhmHA8zw8Hg/efvttbN68GYlEAizLNulYlmUyPM+jXq9DEATHa0KIo8yyLOLxOD799FMAgKIoqNVq0HXdiQKlFKZpOsDtyNXrdWSzWZw6dQrPPfdck2OEEIiiyHONydPIqQ1ElmUQQpBOpxGPxxGPx8HzPGZnZzE3N9eUK7aYpgnTNLFlyxb09/dDFEW0t7cjEAg4lRMIBCDL8seMruvweDzOoUaxLAs8z4PjOBw6dAgDAwMoFovIZDIYGhrCY489BkVRwDBMU14oioJdu3ahv78fqVQKw8PD0HUdDMOA4zjouo5oNAqe528wAO54PB4n3I2e2NXAsizefPNNvPrqq8hms9i5cyfOnTuHdevWOXnRmAculwsPPfQQPvroI3R0dCCTyYBlWaiqCtM0oWka4vH4CiHkIuP3+3dHIhEoitLEoX2pZVmo1Wr44osv4PP5sLCwgNdeew2Tk5NwuVyQJMlJXFufYRgIgoClpSUcO3YMwWAQlUrFsSFJEvr6+q7V6/UcI8tyKhaLVe0QNQqlFJqmOblgN558Pu9QJgiCo0sphSAIKJfLyOfzCIfD4DgOHo8HlmXBMAzouo5kMolgMHjqvvvuU5hcLudPJBIen8/nXGJ7Y3NmA+E4Dna/sAHYenfLCoZhgGVZjI+PY2BgAJVKBbVaDQzDQBRFiKKIwcHB64SQYwDArFq16qIgCBd6e3ubKLCBeDwe1Ot1aJoGy7JgmqYDjGEYJwfs2mZZFpIk4cqVK4hEInC73cjn85AkCZRShMNhhMPhD5wmRimVs9msd+PGjc4ljYkoiiIqlYpj2PZSEASIoghN05qos8/WajVcu3YNO3bsQLlcdpra9u3bV7xe7wkHAAA2lUoJsVisqa/bzUJRFAQCAXAc54RX0zR0dXVheXm5KQKNXU6SJExMTGDLli1oaflmDVizZg0efvjh9ziOu+EAIIRU4/H4X0ulEkKhkEODHYl8Pg+e57Fx40bouu78t3XrVkxNTTlTrrF67PLN5/O4fv06XnzxReTzeTz99NNfZTKZk416DAC0t7cPl0qlYk9PT6VarTZxrWkahoeH8eyzzyIcDkNVVYRCIUSjUVy6dAl28t5L3d1Wi9HRUcRiMaysrNzRdb0jGo3++6vUkqPH3VW+nMlk/tTV1XXw3LlzThVQSsFxHKanp+lTTz1FXn755eFUKsW2trYOWZaFZDKJ8+fPw+12N5UuIcTpfLlcDjdv3sT69esHFhcXWwFg9arIt0AbNho2nU6Pfv7554MnT54U7NmtaRr2799fSiaTOwkh/zx//vz2zs7OsXQ6jVAohLfeegupVAo8z3+Hvmq1ij179mD16tV0YWGBxOPxs5VK5Uy9XmcikYjs9/tHuIako5qmvdvX1xdua2tLZrNZVCoVunfv3tratWsT09PTS5OTk/9oa2t74ubNmzh69Ch27dqF9evX49atW+B5vqmEDcMAANx///2Ympoi09PTOHv27OOxWOzxRCKBYDB4wO/3zzqkKXUVsiSiXC73Z7PZyXfeeSfQ2dmJl156afuNGze2iqI4VCwWo/ZWFAqFcOjQIYyNjeGTTz6BIAhOS2YYBqZpQtd1HDx48Kvu7u7hUqk04Ha7Cy6XawzAGCFkoV7X0TR5isUi0uk0H4vForVa7RcAPmtvb5+6evXqX1paWt7LZDITxWIR4XB4XpKklqWlpbZ0Oo2JiQlnkBmGAUopeJ6Hqqo4cuQI6vX6pt7e3rONtlRVgygK4Bpf3q1XXVGNL9u93j8DwLWr8+iL9+7N5/NBSum/gsFgRNM0d19fX2h8fDwrSVJ7Y+htSnVdhyiKcLvdBsdxPwfQBEAUhW+r4F6RxW9f98V7AQChUGiZUvoEABchpHzXUI5S2m4btAeTvSe63W4EAoHXOZ5/vXHL/k4f+F+FEGLYxgEgkUjM2IPJLtvGSAQCARQKhX5yz8b0owHcK8Fg8DjP847HjdPRNE14vV6Uy+U2Sin5vjt+EgCe5+ftWW8vI3YbNgwDfr8fqqoahBD6fweg6BYIIYVgMFi0S89uQPbv7u5u9PT0/PGH7vnRAGT+m6OyLBcikQjK5TIMw4CqqqjVaujo6MADDzzwmSzLH6iq9v15hZ8oi4uL7xJCfv3+++8jl8shFAph3bp1iMfjk62trft4nv/yh87/B4P9wzZb2pGKAAAAAElFTkSuQmCC" alt="" /></span>
+    <strong>PostgreSQL</strong>
+    <span class="count">
+        <span>{{ collector.count }}</span>
+        <span>{{ '%0.0f'|format(collector.time * 1000) }} ms</span>
+    </span>
+</span>
+{% endblock menu %}
+
+{% block panel %}
+    <h2>Queries</h2>
+    {% for connection, queries in collector.queries %}
+        <h3>Connection <em>{{ connection }}</em></h3>
+        {% if queries is empty %}
+        <p>
+            <em>No queries.</em>
+        </p>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Query</th>
+                    <th>Time (ms)</th>
+                </tr>
+                {% for i, query in queries %}
+                <tr>
+                    <td>
+                        {% if query.type_query is defined %}
+                        QUERY
+                        {% elseif query.type_prepare is defined %}
+                        PREPARE
+                        {% elseif query.type_execute is defined %}
+                        EXECUTE
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ query.sql }}
+                    </td>
+                    <td>
+                        {{ '%0.2f'|format(query.duration * 1000) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
+    <style>
+        h3 { margin-bottom: 0; }
+    </style>
+{% endblock panel %}
