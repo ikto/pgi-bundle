@@ -8,6 +8,8 @@ class PgiLogger
     const PREPARE       = 2;
     const EXECUTE       = 3;
 
+    const MAX_PARAM_LENGTH = 32;
+
     private $queries = array();
     private $currentQuery = null;
 
@@ -16,6 +18,15 @@ class PgiLogger
         if ($this->currentQuery !== null) {
             array_push($this->queries, $this->currentQuery);
         }
+
+        $maxParamLength = self::MAX_PARAM_LENGTH;
+        $params = array_map(function ($val) use ($maxParamLength) {
+            if (strlen($val) > $maxParamLength) {
+                return substr($val, 0, 32) . '...';
+            } else {
+                return $val;
+            }
+        }, $params);
 
         $this->currentQuery = array(
             'type'      => $type,

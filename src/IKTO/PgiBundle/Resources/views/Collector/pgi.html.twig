@@ -59,10 +59,17 @@
                         {% endif %}
                     </td>
                     <td>
-                        {{ query.sql }}
+                        {{ query.sql }} <br>
+                        <small>
+                            <strong>Parameters:</strong> {{ query.params|yaml_encode }}
+                        </small>
                     </td>
                     <td>
+                        {% if query.duration is defined %}
                         {{ '%0.2f'|format(query.duration * 1000) }}
+                        {% else %}
+                        &mdash;
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

@@ -67,4 +67,19 @@ class Database extends BaseDatabase
 
         return $result;
     }
+
+    public function pgQueryParams($query, $params)
+    {
+        if ($this->logger instanceof PgiLogger) {
+            $this->logger->startQuery(PgiLogger::QUERY, $query, $params);
+        }
+
+        $result = parent::pgQueryParams($query, $params);
+
+        if ($this->logger instanceof PgiLogger) {
+            $this->logger->stopQuery();
+        }
+
+        return $result;
+    }
 }
