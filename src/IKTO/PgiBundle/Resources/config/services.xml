@@ -8,6 +8,9 @@
         <service id="pgi.profiler.data_collector" class="IKTO\PgiBundle\DataCollector\PgiDataCollector">
             <tag name="data_collector" template="IktoPgiBundle:Collector:pgi" id="pgi" />
         </service>
+
+        <service id="pgi.logger.abstract" class="IKTO\PgiBundle\Logger\PgiLogger" abstract="true"/>
+
+        <service id="pgi.db.abstract" class="IKTO\PgiBundle\Database\MonitoredDatabase" abstract="true"/>
     </services>
 </container>
-        
