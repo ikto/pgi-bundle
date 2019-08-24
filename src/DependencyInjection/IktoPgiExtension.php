@@ -3,8 +3,8 @@
 namespace IKTO\PgiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,11 +24,11 @@ class IktoPgiExtension extends Extension
         $connections = $config['connections'];
         foreach ($connections as $connectionName => $connectionParams) {
             $loggerId = 'pgi.logger.' . $connectionName;
-            $logger = new DefinitionDecorator('pgi.logger.abstract');
+            $logger = new ChildDefinition('pgi.logger.abstract');
             $container->setDefinition($loggerId, $logger);
             $loggerRef = new Reference($loggerId);
 
-            $definition = new DefinitionDecorator('pgi.db.abstract');
+            $definition = new ChildDefinition('pgi.db.abstract');
             $definition->setArguments(array(
                 "host={$connectionParams['host']} port={$connectionParams['port']} dbname={$connectionParams['dbname']}",
                 $connectionParams['user'],
